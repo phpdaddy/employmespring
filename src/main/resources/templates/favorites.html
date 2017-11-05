@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/main"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Favorites</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Favorites</h1>
+
+    <div th:if="${favorites.isEmpty()}">There is no available vacancy yet...</div>
+    <ul class="list-unstyled" th:each="v : ${favorites}">
+        <li th:include="/fragments/vacancyLoop :: vacancyRow(v=${v})">
+        </li>
+    </ul>
+</div>
+</body>
+</html>

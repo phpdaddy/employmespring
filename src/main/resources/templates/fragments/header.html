@@ -1,0 +1,49 @@
+<div class="row" xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <div th:if="${#authentication.getName()=='anonymousUser'}">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+            <div class="slideshow">
+                <img th:src="@{/images/jcu.jpg}"/>
+                <img th:src="@{/images/prf.jpg}"/>
+            </div>
+        </div>
+    </div>
+    <div th:class="${#authentication.getName()!='anonymousUser' ? 'col-xs-8' : 'col-sm-offset-3 col-sm-6 col-xs-12'}">
+        <a class="logo" th:href="@{/}">
+            <img th:src="@{/images/logo.png}"/>
+        </a>
+    </div>
+
+    <div th:if="${#authentication.getName()!='anonymousUser'}">
+        <div class="hidden-xs col-sm-4">
+            <p>Welcome <span th:text="${#authentication.getName()}">13 february 2011</span></p>
+            <a th:href="@{/logout}" class="btn btn-default btn-primary">Logout</a>
+        </div>
+        <div class="header-mobile navbar-header navbar-default">
+            <button type="button" class="navbar-toggle collapsed "
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="col-xs-12">
+            <form>
+                <nav class="navbar navbar-default">
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="#{navigationBean.currentPage eq 'profile'? 'active':''} ">
+                                <a th:href="@{/profile}">Profile</a></li>
+                            <li th:if="${#authentication.getName()!='anonymousUser'}"><a
+                                    th:href="@{/vacancies}">Vacancies</a></li>
+                            <li sec:authorize="hasRole('ROLE_CANDIDATE')"><a th:href="@{/favorites}">Favorites</a></li>
+                            <li sec:authorize="hasRole('ROLE_EMPLOYER')"><a th:href="@{/my-vacancies}">My vacancies</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </form>
+        </div>
+    </div>
+</div>

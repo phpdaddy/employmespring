@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/main"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create vacancy</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form th:action="@{/vacancies/create}" th:object="${vacancy}" method="post">
+        <div class="alert alert-info" th:if="${param.success}">
+            Vacancy was successfully created
+        </div>
+        <div class="form-group">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            <label class="control-label">Name </label>
+            <input th:field="*{name}" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('description')}"
+                 th:errors="*{description}"></div>
+            <label class="control-label">Description</label>
+            <textarea th:field="*{description}" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('ageMin')}" th:errors="*{ageMin}"></div>
+
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('ageMax')}" th:errors="*{ageMax}"></div>
+            <label class="control-label">Age </label>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 ">
+                    <input th:field="*{ageMin}" class="form-control"/>
+                </div>
+                <div class="col-xs-6 col-sm-6 ">
+                    <input th:field="*{ageMax}" class="form-control"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('experienceMin')}"
+                 th:errors="*{experienceMin}"></div>
+
+            <label class="control-label">Years of experience </label>
+            <input th:field="*{experienceMin}" class="form-control"/>
+        </div>
+        <div class="form-group">
+
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('education')}" th:errors="*{education}"></div>
+
+            <label class="control-label">Education </label>
+            <input th:field="*{education}" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></div>
+
+            <label class="control-label">Area </label>
+            <input th:field="*{area}" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('languages')}" th:errors="*{languages}"></div>
+
+            <label class="control-label">Languages </label>
+            <input th:field="*{languages}" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('place')}" th:errors="*{place}"></div>
+            <label class="control-label">Place </label>
+            <input th:field="*{place}" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
+            <label class="control-label">Salary</label>
+            <input th:field="*{salary}" class="form-control"/>
+        </div>
+
+        <input type="hidden" th:field="*{id}"/>
+        <input class="btn btn-primary" type="submit" value="Create vacancy"/>
+    </form>
+</div>
+</body>
+</html>

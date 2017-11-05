@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/main"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Register</h1>
+    <div class="row">
+        <div class="col-xs-12 col-sm-offset-3 col-sm-6">
+            <form th:action="@{/register/employer}" th:object="${employer}" method="post">
+                <div class="alert alert-info" th:if="${param.success}">
+                    Profile was successfully updated
+                </div>
+                <div class="form-group">
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+
+                    </div>
+                    <label>Username </label>
+                    <input type="text" th:field="*{username}" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+
+                    </div>
+                    <label>Password</label>
+                    <input type="password" th:field="*{password}" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <div class="alert alert-danger" th:if="${passDoNotMatch}">Passwords do not match</div>
+                    <label>Re-enter password</label>
+                    <input type="password" name="repassword" th:value="${repassword}" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                    </div>
+                    <label>Email</label>
+                    <input type="email" th:field="*{email}" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}">
+                    </div>
+                    <label>Company name</label>
+                    <input type="text" th:field="*{companyName}" class="form-control"/>
+                </div>
+
+                <input type="submit" value="Register" class="btn btn-default btn-primary"/>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

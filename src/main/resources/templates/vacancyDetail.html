@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/main"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vacancy</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <br/>
+    <h2><span th:text="${vacancy.name}"></span></h2>
+    <br/>
+    <div th:if="${ vacancy.place  ne ''}">
+        <label> Place:</label> <span th:text="${ vacancy.place }"></span>
+    </div>
+    <div th:if="${vacancy.salary>0}">
+        <label> Salary:</label> <span th:text="${ vacancy.salary }"></span>
+    </div>
+    <div th:if="${vacancy.ageMin>0 or vacancy.ageMax>0}">
+        <label th:text="${vacancy.ageMin>0 ? 'Min age: ':''}"></label>
+        <span th:text="${vacancy.ageMin>0 ? vacancy.ageMin :''}"></span>
+        <label th:text="${vacancy.ageMax>0 ? 'Max age: ':''}"></label>
+        <span th:text="${vacancy.ageMax>0 ?vacancy.ageMax :''}"></span>
+    </div>
+    <div th:if="${vacancy.experienceMin>0}">
+        <label> Min experience:</label> <span th:text="${ vacancy.experienceMin }"></span>
+    </div>
+    <div th:if="${vacancy.publishedAt!=null}">
+        <span th:text="${ vacancy.publishedAt }"></span>
+    </div>
+    <p><span th:text="${vacancy.description }"></span></p>
+</div>
+</body>
+</html>

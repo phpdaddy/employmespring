@@ -1,0 +1,46 @@
+<div class="row" xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+     th:fragment="vacancyRow(v)">
+    <h2><span th:text="${v.name}"></span></h2>
+    <br/>
+    <div th:if="${v.place != ''}">
+        <label>Place:</label> <span th:text="${v.place }"></span>
+    </div>
+    <div th:if="${v.salary>0}">
+        <label>Salary:</label> <span th:text="${v.salary }"></span>
+    </div>
+    <div th:if=" ${v.ageMin>0 or v.ageMax>0}">
+        <label th:text="${v.ageMin>0 ? 'Min age: ':''}"></label>
+        <span th:text="${v.ageMin>0 ? v.ageMin :''}"></span>
+        <label th:text="${v.ageMax>0 ? 'Max age: ':''}"></label>
+        <span th:text="${v.ageMax>0 ? v.ageMax :''}"></span>
+    </div>
+    <div th:if="${v.experienceMin>0}">
+        <label>Min experience:</label> <span th:text="${v.experienceMin }"></span>
+    </div>
+    <div th:if="${v.publishedAt!=null}">
+        <label th:text="${v.publishedAt }"></label>
+    </div>
+    <p><span th:text="${v.description}"></span></p>
+
+
+    <a sec:authorize="hasRole('ROLE_EMPLOYER')"
+       th:href="@{/vacancies/{id}/edit(id=${v.id})}"
+       class="btn btn-default btn-primary">Edit</a>
+
+    <a sec:authorize="hasRole('ROLE_EMPLOYER')" th:href="@{/vacancies/{id}/remove(id=${v.id})}"
+       class="btn btn-default btn-danger">Remove</a>
+
+    <a sec:authorize="hasRole('ROLE_CANDIDATE')" th:href="@{/vacancies/{id}(id=${v.id})}"
+       class="btn btn-default btn-primary">Read more</a>
+
+    <a sec:authorize="hasRole('ROLE_CANDIDATE')" th:href="@{/vacancies/{id}/addToFavorites(id=${v.id})}"
+       th:if="${!favorites.contains(v)}"
+       class="btn btn-default btn-primary">Add to favorites</a>
+
+    <a sec:authorize="hasRole('ROLE_CANDIDATE')" th:href="@{/vacancies/{id}/removeFromFavorites(id=${v.id})}"
+       th:if="${favorites.contains(v)}"
+       class="btn btn-default btn-danger">Remove from
+        favorites</a>
+
+</div>
