@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView loginPage(HttpServletRequest request, @RequestParam(required = false) String username, @RequestParam(required = false) String password) {
-        return new ModelAndView("login")
-                .addObject("username", username)
-                .addObject("password", password);
+    public String loginPage(HttpServletRequest request) {
+        return "login";
     }
 }
